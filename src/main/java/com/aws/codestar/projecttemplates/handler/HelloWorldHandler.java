@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Handler for requests to Lambda function.
@@ -17,6 +18,8 @@ public class HelloWorldHandler implements RequestHandler<Object, Object> {
     public Object handleRequest(final Object input, final Context context) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        return new GatewayResponse(new JSONObject().put("Output", "Rats").toString(), headers, 200);
+        Random rand = new Random(); 
+        int value = rand.nextInt(11);
+        return new GatewayResponse(new JSONObject().put("Output", Integer.toString(value)).toString(), headers, 200);
     }
 }
